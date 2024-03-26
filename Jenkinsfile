@@ -35,9 +35,5 @@ pipeline {
                 '''
       }
     }
-
-  }
-  triggers {
-    pollSCM('* * * * *')
   }
 }
