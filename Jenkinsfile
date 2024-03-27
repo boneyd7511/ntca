@@ -9,8 +9,8 @@ pipeline {
     stage('Lint') {
       steps {
         echo 'Linting..'
-        sh '''apt-get install pip
-pip install pylint
+        sh '''sudo apt-get install pip
+sudo pip install pylint
 pylint helloworld.py'''
       }
     }
