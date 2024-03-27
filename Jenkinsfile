@@ -6,9 +6,12 @@ pipeline {
 
   }
   stages {
-    stage('Build') {
+    stage('Lint') {
       steps {
-        echo 'Building..'
+        echo 'Linting..'
+        sh '''apt-get install pip
+pip install pylint
+pylint helloworld.py'''
       }
     }
 
