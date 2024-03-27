@@ -10,7 +10,7 @@ pipeline {
       steps {
         echo 'Linting..'
         sh '''sudo apt-get install pip -y
-sudo pip install pylint -y
+sudo pip install pylint
 pylint helloworld.py'''
       }
     }
