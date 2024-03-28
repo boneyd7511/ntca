@@ -10,8 +10,8 @@ pipeline {
       steps {
         echo 'Linting..'
         sh '''sudo apt-get install pip -y
-sudo pip install pylint
-pylint helloworld.py'''
+              sudo pip install pylint
+              pylint helloworld.py'''
       }
     }
 
@@ -29,6 +29,17 @@ pylint helloworld.py'''
                 '''
       }
     }
-
   }
+  post {
+        always {
+            publishHTML(target: [
+                allowMissing: false,
+                alwaysLinkToLastBuild: true,
+                keepAll: true,
+                reportDir: '.',
+                reportFiles: 'index.html',
+                reportName: 'My HTML Report'
+            ])
+        }
+    }
 }
