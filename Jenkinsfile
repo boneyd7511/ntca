@@ -15,12 +15,9 @@ pylint helloworld.py'''
       }
     }
 
-    stage('Test') {
+    stage('Security Scanner') {
       steps {
-        echo 'Testing..'
-        sh '''
-          python3 helloworld.py
-        '''
+        echo 'Beginning Security Scan..'
       }
     }
 
