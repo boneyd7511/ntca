@@ -30,16 +30,4 @@ pipeline {
       }
     }
   }
-  post {
-        always {
-            publishHTML(target: [
-                allowMissing: false,
-                alwaysLinkToLastBuild: true,
-                keepAll: true,
-                reportDir: '.',
-                reportFiles: 'index.html',
-                reportName: 'My HTML Report'
-            ])
-        }
-    }
 }
