@@ -14,7 +14,7 @@ sudo pip install pylint
 pylint helloworld.py'''
         sh '''sudo pip install ruff
 ruff check
-ruff format'''
+'''
       }
     }
 
@@ -27,9 +27,7 @@ ruff format'''
     stage('Format') {
       steps {
         echo 'Formatting....'
-        sh '''
-                echo "doing delivery stuff.."
-                '''
+        sh 'ruff format'
       }
     }
 
