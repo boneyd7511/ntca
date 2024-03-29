@@ -27,19 +27,22 @@ pipeline {
         sh '''
                 echo "doing delivery stuff.."
                 '''
+        sleep 10
       }
     }
+
   }
   post {
-        always {
-            publishHTML(target: [
-                allowMissing: false,
-                alwaysLinkToLastBuild: true,
-                keepAll: true,
-                reportDir: '.',
-                reportFiles: 'index.html',
-                reportName: 'My HTML Report'
-            ])
-        }
+    always {
+      publishHTML([
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: true,
+                        keepAll: true,
+                        reportDir: '.',
+                        reportFiles: 'index.html',
+                        reportName: 'My HTML Report'
+                    ])
+      }
+
     }
-}
+  }
