@@ -10,8 +10,11 @@ pipeline {
       steps {
         echo 'Linting..'
         sh '''sudo apt-get install pip -y
-              sudo pip install pylint
-              pylint helloworld.py'''
+sudo pip install pylint
+pylint helloworld.py'''
+        sh '''sudo pip install ruff
+ruff check
+ruff format'''
       }
     }
 
@@ -21,28 +24,26 @@ pipeline {
       }
     }
 
-    stage('Deliver') {
+    stage('Format') {
       steps {
-        echo 'Deliver....'
+        echo 'Formatting....'
         sh '''
                 echo "doing delivery stuff.."
                 '''
-        sleep 10
+      }
+    }
+
+    stage('Validate') {
+      steps {
+        echo 'Validating..'
       }
     }
 
   }
   post {
     always {
-      publishHTML([
-                        allowMissing: false,
-                        alwaysLinkToLastBuild: true,
-                        keepAll: true,
-                        reportDir: '.',
-                        reportFiles: 'index.html',
-                        reportName: 'My HTML Report'
-                    ])
-      }
-
+      publishHTML(allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: '.', reportFiles: 'index.html', reportName: 'My HTML Report')
     }
+
   }
+}
