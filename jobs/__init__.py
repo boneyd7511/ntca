@@ -1,1 +1,4 @@
+from .jobs import *
 
+from nautobot.apps.jobs import register_jobs
+register_jobs(MyJob, AnotherJob)
