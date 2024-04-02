@@ -1,2 +1,2 @@
-from .jobs import NewBranch
+from .jobs.cve-job import NewBranch
 
