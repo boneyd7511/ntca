@@ -13,7 +13,7 @@ class ProvisionCVE(Job):
         name = "Provision CVEs"
         description = "Pull CVEs from the internet and propogate them into Nautobot."
 
-    def run():
+    def run(self):
         # Create the new location
 
         cve_name = "CVE-2024-20303"
@@ -23,4 +23,5 @@ class ProvisionCVE(Job):
         cve = CVELCM(name=cve_name, published_date=cve_published_date, link=cve_link)
 
         cve.validated_save()
+
 register_jobs(ProvisionCVE)
