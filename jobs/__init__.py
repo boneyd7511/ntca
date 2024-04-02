@@ -1,1 +1,1 @@
-from jobs import cve-job
+from . import *
