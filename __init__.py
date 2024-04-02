@@ -1,2 +1,2 @@
-from .jobs import NewBranch
+from . import NewBranch
 
