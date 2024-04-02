@@ -1,1 +1,1 @@
-from . import cve-job.py
+from .cve-job import NewBranch
