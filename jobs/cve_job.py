@@ -5,55 +5,22 @@ from nautobot.core.celery import register_jobs
 from nautobot.apps.jobs import Job, StringVar, IntegerVar, ObjectVar
 from nautobot.dcim.models import Location, LocationType, Device, Manufacturer, DeviceType
 from nautobot.extras.models import Status, Role
+from nautobot_device_lifecycle_mgmt.models import CVELCM
 
 
-class NewBranch(Job):
+class ProvisionCVE(Job):
     class Meta:
-        name = "New Branch"
-        description = "Provision a new branch location"
-        field_order = ["location_name", "switch_count", "switch_model"]
+        name = "Provision CVEs"
+        description = "Pull CVEs from the internet and propogate them into Nautobot."
 
-    location_name = StringVar(description="Name of the new location")
-    switch_count = IntegerVar(description="Number of access switches to create")
-    manufacturer = ObjectVar(model=Manufacturer, required=False)
-    switch_model = ObjectVar(
-        description="Access switch model", model=DeviceType, query_params={"manufacturer_id": "$manufacturer"}
-    )
-
-    def run(self, location_name, switch_count, switch_model):
-        STATUS_PLANNED = Status.objects.get(name="Planned")
-
+    def run():
         # Create the new location
-        root_type = LocationType.objects.get_or_create(name="Campus")
-        location = Location(
-            name=location_name,
-            location_type=root_type,
-            status=STATUS_PLANNED,
-        )
-        location.validated_save()
-        self.logger.info("Created new location", extra={"object": location})
 
-        # Create access switches
-        device_ct = ContentType.objects.get_for_model(Device)
-        switch_role = Role.objects.get(name="Access Switch")
-        switch_role.content_types.add(device_ct)
-        for i in range(1, switch_count + 1):
-            switch = Device(
-                device_type=switch_model,
-                name=f"{location.name}-switch{i}",
-                location=location,
-                status=STATUS_PLANNED,
-                role=switch_role,
-            )
-            switch.validated_save()
-            self.logger.info("Created new switch", extra={"object": switch})
+        cve_name = "CVE-2024-20303"
+        cve_published_date = "2024-04-02"
+        cve_link = "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-wlc-mdns-dos-4hv6pBGf"
 
-        # Generate a CSV table of new devices
-        output = ["name,make,model"]
-        for switch in Device.objects.filter(location=location):
-            attrs = [switch.name, switch.device_type.manufacturer.name, switch.device_type.model]
-            output.append(",".join(attrs))
+        cve = CVELCM(name=cve_name, published_date=cve_published_date, link=cve_link)
 
-        return "\n".join(output)
-    
-register_jobs(NewBranch)
+        cve.validated_save()
+register_jobs(ProvisionCVE)
