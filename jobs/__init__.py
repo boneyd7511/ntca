@@ -1,4 +1,4 @@
-from nautobot.apps.jobs import register_jobs
+from . import *
 #from nautobot.core.celery import register_jobs
 
 
