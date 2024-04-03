@@ -2,7 +2,7 @@ from django.contrib.contenttypes.models import ContentType
 
 from nautobot.core.celery import register_jobs
 from nautobot.apps.jobs import Job, StringVar, IntegerVar, ObjectVar
-from nautobot.dcim.models.devices import Location, LocationType, Device, Manufacturer, DeviceType, Platform
+from nautobot.dcim.models import Location, LocationType, Device, Manufacturer, DeviceType, Platform
 from nautobot.extras.models import Status, Role
 from nautobot_device_lifecycle_mgmt.models import CVELCM, SoftwareLCM
 
