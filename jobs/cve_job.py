@@ -85,6 +85,8 @@ class ProvisionCVE(Job):
         
     def run(self):
         
+        self.scrape_webpage()
+        
         #If CVE is not already in nautobot
         cve_url = "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/" + self.cves_id[0] + "/csaf/" + self.cves_id[0]+ ".json"
         self.download_file(cve_url, self.cve_file_name)
