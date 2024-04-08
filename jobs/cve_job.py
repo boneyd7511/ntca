@@ -113,6 +113,8 @@ class ProvisionCVE(Job):
                 print(sp)
         else:
             print(f"No service packs found under IOS-XE product family.")
+            
+        os.remove(self.cve_file_name)    
         
         #LocationType.objects.get_or_create(name="Campus")
         
@@ -122,6 +124,7 @@ class ProvisionCVE(Job):
 
         cve = CVELCM(name=cve_name, published_date=cve_published_date, link=cve_link)
         cve.validated_save()
-     
+
+        
 
 register_jobs(ProvisionCVE)
