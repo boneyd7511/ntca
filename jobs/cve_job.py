@@ -6,9 +6,6 @@ from nautobot.dcim.models import Location, LocationType, Device, Manufacturer, D
 from nautobot.extras.models import Status, Role
 from nautobot_device_lifecycle_mgmt.models import CVELCM, SoftwareLCM
 
-import requests
-from bs4 import BeautifulSoup
-
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
@@ -87,6 +84,8 @@ class ProvisionCVE(Job):
         
         self.scrape_webpage()
         
+        print(CVELCM.objects.all())
+        
         #If CVE is not already in nautobot
         cve_url = "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/" + self.cves_id[0] + "/csaf/" + self.cves_id[0]+ ".json"
         self.download_file(cve_url, self.cve_file_name)
@@ -100,19 +99,19 @@ class ProvisionCVE(Job):
         ios_xe_service_packs = self.extract_service_packs(json_data['product_tree'], 'Cisco IOS XE Software')
 
         # Print the extracted service pack names
-        if ios_service_packs:
-            print(f"Service Packs under IOS:")
-            for sp in ios_service_packs:
-                print(sp)
-        else:
-            print(f"No service packs found under IOS product family.")
+        #if ios_service_packs:
+            #print(f"Service Packs under IOS:")
+            #for sp in ios_service_packs:
+                #print(sp)
+        #else:
+            #print(f"No service packs found under IOS product family.")
 
-        if ios_xe_service_packs:
-            print(f"Service Packs under IOS-XE:")
-            for sp in ios_xe_service_packs:
-                print(sp)
-        else:
-            print(f"No service packs found under IOS-XE product family.")
+        #if ios_xe_service_packs:
+            #print(f"Service Packs under IOS-XE:")
+            #for sp in ios_xe_service_packs:
+                #print(sp)
+        #else:
+            #print(f"No service packs found under IOS-XE product family.")
             
         os.remove(self.cve_file_name)    
         
