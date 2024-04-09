@@ -83,11 +83,8 @@ class ProvisionCVE(Job):
         
         self.scrape_webpage()
         
-        root_type = LocationType.objects.get_or_create(name="Campus")
-        print(root_type.name)
-        objects = []
-        objects = CVELCM.objects.all()
-        print(objects)
+        for cve in CVELCM.objects.all():
+            print(cve.name)
         
         #If CVE is not already in nautobot
         cve_url = "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/" + self.cves_id[0] + "/csaf/" + self.cves_id[0]+ ".json"
