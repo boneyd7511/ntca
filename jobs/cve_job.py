@@ -14,7 +14,6 @@ import requests
 import os
 import json
 
-
 class ProvisionCVE(Job):
     class Meta:
         name = "Provision CVEs"
@@ -84,7 +83,10 @@ class ProvisionCVE(Job):
         
         self.scrape_webpage()
         
-        print(CVELCM.objects.all())
+        root_type = LocationType.objects.get_or_create(name="Campus")
+        objects = []
+        objects = CVELCM.objects.all()
+        print(objects)
         
         #If CVE is not already in nautobot
         cve_url = "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/" + self.cves_id[0] + "/csaf/" + self.cves_id[0]+ ".json"
