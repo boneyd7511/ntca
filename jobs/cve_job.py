@@ -84,7 +84,7 @@ class ProvisionCVE(Job):
         self.scrape_webpage()
         
         root_type = LocationType.objects.get_or_create(name="Campus")
-        print(root_type)
+        print(root_type.name)
         objects = []
         objects = CVELCM.objects.all()
         print(objects)
