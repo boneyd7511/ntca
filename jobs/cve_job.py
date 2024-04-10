@@ -83,8 +83,18 @@ class ProvisionCVE(Job):
         
         self.scrape_webpage()
         
+        current_softwares = []
+        current_cves = []
+        
         for cve in CVELCM.objects.all():
-            print(cve.name)
+            current_cves.append(cve.name)
+        for software in SoftwareLCM.objects.all():
+            current_softwares.append(f"{software.device_platform} - {software.version}")
+        
+        print(current_softwares)
+        print(current_cves)
+            
+        
         
         #If CVE is not already in nautobot
         cve_url = "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/" + self.cves_id[0] + "/csaf/" + self.cves_id[0]+ ".json"
