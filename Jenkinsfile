@@ -9,7 +9,7 @@ pipeline {
     stage('Lint') {
       steps {
         echo 'Linting..'
-        sh 'pylint helloworld.py'
+        sh 'find . -name "*.py" -exec pylint {} +'
         sh '''ruff check
 '''
       }
