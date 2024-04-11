@@ -118,21 +118,21 @@ class ProvisionCVE(Job):
                         ios_xe_softwares.append(f"Cisco IOS-XE - {pack}")
 
                 if ios_softwares or ios_xe_softwares:
+
                     cve_object = None
                     cve_date = json_data['document']['tracking']['initial_release_date']
                     cve_link = "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/" + self.cves_id[self.cves.index(cve)]
-                    cve_score = json_data['vulnerabilities'][0]['scores'][0]['cvss_v3']['baseScore']
-                    cve_severity = json_data['vulnerabilities'][0]['scores'][0]['cvss_v3']['baseSeverity']
-                    print(cve_severity)
+                    #cve_score = json_data['vulnerabilities'][0]['scores'][0]['cvss_v3']['baseScore']
+                    #cve_severity = json_data['vulnerabilities'][0]['scores'][0]['cvss_v3']['baseSeverity']
                     for software in ios_softwares:
                         if software in nautobot_softwares:
-                            cve_object = CVELCM(name=cve, published_date=cve_date, link=cve_link, cvss=cve_score, severity=cve_severity)
+                            cve_object = CVELCM(name=cve, published_date=cve_date, link=cve_link)#, cvss=cve_score, severity=cve_severity)
                             cve_object.validated_save()
                             break
                     if cve_object == None:
                         for software in ios_xe_softwares:
                             if software in nautobot_softwares:
-                                cve_object = CVELCM(name=cve, published_date=cve_date, link=cve_link, cvss=cve_score, severity=cve_severity)
+                                cve_object = CVELCM(name=cve, published_date=cve_date, link=cve_link)#, cvss=cve_score, severity=cve_severity)
                                 cve_object.validated_save()
                                 break
                     
