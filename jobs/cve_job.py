@@ -37,11 +37,19 @@ class ProvisionCVE(Job):
         soup = BeautifulSoup(page_source, "html.parser")
         data = soup.find_all("span", class_="ng-binding")
 
+        cve_add_count = 0
         for i in range(0,len(data)):
             if data[i].text.startswith("CVE") and data[i].text not in self.cves:
                 self.cves.append(data[i].text)
+                cve_add_count += 1
             elif data[i].text.startswith("cisco-sa") and data[i].text not in self.cves_id:
-                self.cves_id.append(data[i].text)
+                if cve_add_count == 2:
+                    self.cves_id.append(data[i].text)
+                    self.cves_id.append(data[i].text)
+                    cve_add_count = 0
+                else:
+                    self.cves_id.append(data[i].text)
+                    cve_add_count = 0
 
     def download_file(self, url, filename):
         # Send a GET request to the URL
