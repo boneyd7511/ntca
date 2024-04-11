@@ -9,11 +9,7 @@ pipeline {
     stage('Lint') {
       steps {
         echo 'Linting..'
-        sh '''sudo apt-get update -y
-sudo apt-get upgrade -y
-sudo apt-get install pip -y
-sudo pip install pylint
-pylint helloworld.py'''
+        sh 'pylint helloworld.py'
         sh '''sudo pip install ruff
 ruff check
 '''
