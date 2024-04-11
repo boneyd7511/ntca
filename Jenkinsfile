@@ -1,7 +1,7 @@
 pipeline {
   agent {
     node {
-      label 'ubuntu-2004'
+      label 'root-node'
     }
 
   }
