@@ -78,61 +78,75 @@ class ProvisionCVE(Job):
                         service_packs.extend(self.extract_service_packs(branch, target_product_family))
 
         return service_packs
+    
+    def extract_published_date(self, data):
+        if isinstance(data, dict):
+            if 'initial_release_date' in data:
+                return data['initial_release_date']
+        #else:
+            
         
     def run(self):
         
         self.scrape_webpage()
         
-        current_softwares = []
-        current_cves = []
+        nautobot_softwares = []
+        nautobot_cves = []
         
         for cve in CVELCM.objects.all():
-            current_cves.append(cve.name)
+            nautobot_cves.append(cve.name)
         for software in SoftwareLCM.objects.all():
-            current_softwares.append(f"{software.device_platform} - {software.version}")
-        
-        print(current_softwares)
-        print(current_cves)
+            nautobot_softwares.append(f"{software.device_platform} - {software.version}")
             
-        
-        
         #If CVE is not already in nautobot
-        cve_url = "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/" + self.cves_id[0] + "/csaf/" + self.cves_id[0]+ ".json"
-        self.download_file(cve_url, self.cve_file_name)
         
-        # Load JSON data from the file
-        with open(self.cve_file_name, 'r', encoding='utf-8') as file:
-            json_data = json.load(file)
-
-        # Extract service packs under the specified product family
-        ios_service_packs = self.extract_service_packs(json_data['product_tree'], 'IOS')
-        ios_xe_service_packs = self.extract_service_packs(json_data['product_tree'], 'Cisco IOS XE Software')
-
-        # Print the extracted service pack names
-        #if ios_service_packs:
-            #print(f"Service Packs under IOS:")
-            #for sp in ios_service_packs:
-                #print(sp)
-        #else:
-            #print(f"No service packs found under IOS product family.")
-
-        #if ios_xe_service_packs:
-            #print(f"Service Packs under IOS-XE:")
-            #for sp in ios_xe_service_packs:
-                #print(sp)
-        #else:
-            #print(f"No service packs found under IOS-XE product family.")
+        for cve in self.cves:
+            ios_softwares=[]
+            ios_xe_softwares=[]
             
-        os.remove(self.cve_file_name)    
-        
-        #LocationType.objects.get_or_create(name="Campus")
-        
-        cve_name = "CVE-2024-20303"
-        cve_published_date = "2024-04-02"
-        cve_link = "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-wlc-mdns-dos-4hv6pBGf"
+            if cve not in nautobot_cves:
+                cve_url = "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/" + self.cves_id[self.cves.index(cve)] + "/csaf/" + self.cves_id[self.cves.index(cve)]+ ".json"
+                self.download_file(cve_url, self.cve_file_name)
+            
+            # Load JSON data from the file
+            with open(self.cve_file_name, 'r', encoding='utf-8') as file:
+                json_data = json.load(file)
 
-        cve = CVELCM(name=cve_name, published_date=cve_published_date, link=cve_link)
-        cve.validated_save()
+            # Extract service packs under the specified product family
+            ios_service_packs = self.extract_service_packs(json_data['product_tree'], 'IOS')
+            ios_xe_service_packs = self.extract_service_packs(json_data['product_tree'], 'Cisco IOS XE Software')
+            cve_date = json_data['document']['tracking']['initial_release_date']
+            base_score = json_data['vulnerabilities'][0]['scores'][0]['cvss_v3']['baseScore']
+            base_severity = json_data['vulnerabilities'][0]['scores'][0]['cvss_v3']['baseSeverity']
+            
+            
+            if ios_service_packs:
+                for pack in ios_service_packs:
+                    ios_softwares.append(f"Cisco IOS - {pack}")
+                for software in ios_softwares:
+                    if software in nautobot_softwares:
+                        cve_name = cve
+                        cve_published_date = "2024-04-02"
+                        cve_link = "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-wlc-mdns-dos-4hv6pBGf"
+
+                        cve = CVELCM(name=cve_name, published_date=cve_published_date, link=cve_link)
+                        cve.validated_save()
+                        
+                    
+
+            if ios_xe_service_packs:
+                for pack in ios_xe_service_packs:
+                    ios_xe_softwares.append(f"Cisco IOS-XE - {pack}")
+                for sp in ios_xe_service_packs:
+                    print(sp)
+            else:
+                print(f"No service packs found under IOS-XE product family.")
+                
+            os.remove(self.cve_file_name)    
+            
+            #LocationType.objects.get_or_create(name="Campus")
+            
+            
 
         
 
