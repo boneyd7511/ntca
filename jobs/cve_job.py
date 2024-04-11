@@ -60,9 +60,6 @@ class ProvisionCVE(Job):
             # Open a new file in binary write mode and write the content of the response
             with open(filename, 'wb') as f:
                 f.write(response.content)
-            print(f"File downloaded successfully: {filename}")
-        else:
-            print(f"Failed to download file: {url}")
 
     def extract_service_packs(self, data, target_product_family):
         service_packs = []
@@ -126,6 +123,7 @@ class ProvisionCVE(Job):
                     cve_link = "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/" + self.cves_id[self.cves.index(cve)]
                     cve_score = json_data['vulnerabilities'][0]['scores'][0]['cvss_v3']['baseScore']
                     cve_severity = json_data['vulnerabilities'][0]['scores'][0]['cvss_v3']['baseSeverity']
+                    print(cve_severity)
                     for software in ios_softwares:
                         if software in nautobot_softwares:
                             cve_object = CVELCM(name=cve, published_date=cve_date, link=cve_link, cvss=cve_score, severity=cve_severity)
