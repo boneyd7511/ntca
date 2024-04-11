@@ -1,10 +1,7 @@
-from django.contrib.contenttypes.models import ContentType
-
 from nautobot.core.celery import register_jobs
-from nautobot.apps.jobs import Job, StringVar, IntegerVar, ObjectVar
-from nautobot.dcim.models import Location, LocationType, Device, Manufacturer, DeviceType, Platform
-from nautobot.extras.models import Status, Role
+from nautobot.apps.jobs import Job
 from nautobot_device_lifecycle_mgmt.models import CVELCM, SoftwareLCM
+from nautobot_device_lifecycle_mgmt import choices
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -124,16 +121,18 @@ class ProvisionCVE(Job):
                     cve_date = cve_date[:10]
                     cve_link = "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/" + self.cves_id[self.cves.index(cve)]
                     cve_score = json_data['vulnerabilities'][0]['scores'][0]['cvss_v3']['baseScore']
-                    #cve_severity = json_data['vulnerabilities'][0]['scores'][0]['cvss_v3']['baseSeverity']
+                    cve_severity = json_data['vulnerabilities'][0]['scores'][0]['cvss_v3']['baseSeverity']
+                    cve_severity = cve_severity.lower()
+                    cve_severity = cve_severity[0].upper() + cve_severity[1:]
                     for software in ios_softwares:
                         if software in nautobot_softwares:
-                            cve_object = CVELCM(name=cve, published_date=cve_date, link=cve_link, cvss=cve_score)#, severity=cve_severity)
+                            cve_object = CVELCM(name=cve, published_date=cve_date, link=cve_link, cvss=cve_score, severity=cve_severity)
                             cve_object.validated_save()
                             break
                     if cve_object == None:
                         for software in ios_xe_softwares:
                             if software in nautobot_softwares:
-                                cve_object = CVELCM(name=cve, published_date=cve_date, link=cve_link, cvss=cve_score)#, severity=cve_severity)
+                                cve_object = CVELCM(name=cve, published_date=cve_date, link=cve_link, cvss=cve_score, severity=cve_severity)
                                 cve_object.validated_save()
                                 break
                     
