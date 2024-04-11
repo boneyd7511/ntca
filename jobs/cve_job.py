@@ -129,14 +129,16 @@ class ProvisionCVE(Job):
                     for software in ios_softwares:
                         if software in nautobot_softwares:
                             cve_object = CVELCM(name=cve, published_date=cve_date, link=cve_link, cvss=cve_score, severity=cve_severity)
+                            cve_object.validated_save()
                             break
                     if cve_object == None:
                         for software in ios_xe_softwares:
                             if software in nautobot_softwares:
                                 cve_object = CVELCM(name=cve, published_date=cve_date, link=cve_link, cvss=cve_score, severity=cve_severity)
+                                cve_object.validated_save()
                                 break
-
-                    if cve_object != None:
+                    
+                    if cve_object != None:      
                         for software in ios_softwares:
                             if software in nautobot_softwares:
                                 device_platform_name, version_number = software.split(" - ")
