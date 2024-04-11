@@ -10,8 +10,7 @@ pipeline {
       steps {
         echo 'Linting..'
         sh 'pylint helloworld.py'
-        sh '''sudo pip install ruff
-ruff check
+        sh '''ruff check
 '''
       }
     }
