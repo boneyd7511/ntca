@@ -10,7 +10,7 @@ pipeline {
       steps {
         echo 'Linting..'
         sh '''sudo apt-get update -y
-sudo apt install python3-pip -y
+sudo apt-get install python3-pip -y
 pip install pylint'''
         sh '''pylint cve_job.py
 find . -name "*.py" -exec pylint {} +'''
