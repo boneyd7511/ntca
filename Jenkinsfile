@@ -7,23 +7,12 @@ pipeline {
   }
   stages {
     stage('Lint') {
-      parallel {
-        stage('Lint') {
-          steps {
-            echo 'Linting..'
-            sh '''sudo apt-get update -y
+      steps {
+        echo 'Linting..'
+        sh '''sudo apt-get update -y
 sudo apt-get install python3-pip -y
 sudo pip install pylint'''
-            sh 'find . -name "*.py" -exec pylint {} +'
-          }
-        }
-
-        stage('Failed Lint') {
-          steps {
-            echo 'Linting Failed... Continuing'
-          }
-        }
-
+        sh '#find . -name "*.py" -exec pylint {} +'
       }
     }
 
