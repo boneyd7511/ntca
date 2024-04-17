@@ -33,7 +33,7 @@ sudo pip install pylint'''
 git config user.name "Jenkins"
 git add .
 git commit -m "Formatted code with Ruff"
-git push origin master'''
+git push https://github.com/boneyd7511/ntca master'''
       }
     }
 
