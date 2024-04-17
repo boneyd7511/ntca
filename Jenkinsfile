@@ -29,12 +29,11 @@ sudo pip install pylint'''
         echo 'Formatting....'
         sh 'sudo pip install ruff'
         sh 'ruff format'
-        sh '''#git config user.email "jenkins@example.com"
-#git config user.name "Jenkins"
-#git add .
-#git commit -m "Formatted code with Ruff"
-#git push origin master'''
-        git(url: 'https://github.com/boneyd7511/ntca', branch: 'master', changelog: true, credentialsId: '6595730a-f516-4839-a4e7-63ece2d30e72')
+        sh '''git config user.email "jenkins@example.com"
+git config user.name "Jenkins"
+git add .
+git commit -m "Formatted code with Ruff"
+git push origin master'''
       }
     }
 
