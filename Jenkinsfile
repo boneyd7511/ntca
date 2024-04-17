@@ -9,8 +9,8 @@ pipeline {
     stage('Lint') {
       steps {
         echo 'Linting..'
-        sh '''apt-get update -y
-apt install python3-pip -y
+        sh '''sudo apt-get update -y
+sudp apt install python3-pip -y
 pip install pylint'''
         sh 'find . -name "*.py" -exec pylint {} +'
         sh '''ruff check
