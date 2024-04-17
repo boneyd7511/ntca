@@ -13,14 +13,14 @@ pipeline {
 sudo apt-get install python3-pip -y
 sudo pip install pylint'''
         sh 'find . -name "*.py" -exec pylint {} +'
-        sh '''ruff check
-'''
       }
     }
 
     stage('Security Scanner') {
       steps {
         echo 'Beginning Security Scan..'
+        sh 'sudo pip install bandit'
+        sh 'bandit -r .'
       }
     }
 
