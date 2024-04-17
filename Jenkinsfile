@@ -12,8 +12,7 @@ pipeline {
         sh '''sudo apt-get update -y
 sudo apt-get install python3-pip -y
 sudo pip install pylint'''
-        sh '''pylint cve_job.py
-find . -name "*.py" -exec pylint {} +'''
+        sh 'find . -name "*.py" -exec pylint {} +'
         sh '''ruff check
 '''
       }
