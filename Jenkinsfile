@@ -27,7 +27,7 @@ sudo pip install pylint'''
     stage('Format') {
       steps {
         echo 'Formatting....'
-        sh 'pip install ruff'
+        sh 'sudo pip install ruff'
         sh 'ruff format'
       }
     }
