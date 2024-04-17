@@ -9,6 +9,7 @@ pipeline {
     stage('Lint') {
       steps {
         echo 'Linting..'
+        sh 'pip install pylint'
         sh 'find . -name "*.py" -exec pylint {} +'
         sh '''ruff check
 '''
