@@ -11,7 +11,7 @@ pipeline {
         echo 'Linting..'
         sh '''sudo apt-get update -y
 sudo apt-get install python3-pip -y
-pip install pylint'''
+sudo pip install pylint'''
         sh '''pylint cve_job.py
 find . -name "*.py" -exec pylint {} +'''
         sh '''ruff check
