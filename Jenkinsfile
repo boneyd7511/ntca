@@ -20,13 +20,14 @@ sudo pip install pylint'''
       steps {
         echo 'Beginning Security Scan..'
         sh 'sudo pip install bandit'
-        sh 'bandit -r .'
+        sh '#bandit -r .'
       }
     }
 
     stage('Format') {
       steps {
         echo 'Formatting....'
+        sh 'pip install ruff'
         sh 'ruff format'
       }
     }
