@@ -29,7 +29,9 @@ sudo pip install pylint'''
         echo 'Formatting....'
         sh 'sudo pip install ruff'
         sh 'ruff format'
-        sh '''git add .
+        sh '''git config user.email "jenkins@example.com"
+git config user.name "Jenkins"
+git add .
 git commit -m "Formatted code with Ruff"
 git push origin master'''
       }
