@@ -10,7 +10,7 @@ pipeline {
                     #sudo apt-get install python3-pip -y
                     #sudo pip install pylint
                 '''
-                sh '#find . -name "*.py" -exec pylint {} +'
+                sh 'find . -name "*.py" -exec pylint {} +'
             }
         }
 
