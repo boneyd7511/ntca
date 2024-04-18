@@ -18,7 +18,7 @@ pipeline {
             steps {
                 echo 'Beginning Security Scan..'
                 sh '#sudo pip install bandit'
-                sh '#bandit -r .'
+                sh 'bandit -r .'
             }
         }
 
