@@ -10,14 +10,14 @@ pipeline {
                     #sudo apt install python3-pip -y
                     #sudo apt install pylint
                 '''
-                #sh 'find . -name "*.py" -exec pylint {} +'
+                sh '#find . -name "*.py" -exec pylint {} +'
             }
         }
 
         stage('Security Scanner') {
             steps {
                 echo 'Beginning Security Scan..'
-                #sh 'sudo pip install bandit'
+                sh '#sudo pip install bandit'
                 sh '#bandit -r .'
             }
         }
@@ -25,7 +25,7 @@ pipeline {
         stage('Format') {
             steps {
                 echo 'Formatting....'
-                #sh 'sudo pip install ruff'
+                sh '#sudo pip install ruff'
                 sh 'ruff format'
                 sh '''
                     #git config user.email "jenkins@example.com"
