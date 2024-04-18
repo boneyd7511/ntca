@@ -48,6 +48,5 @@ pipeline {
         always {
             publishHTML(allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: '.', reportFiles: 'index.html', reportName: 'My HTML Report')
         }
-        gitPush()
     }
 }
