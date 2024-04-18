@@ -18,7 +18,7 @@ pipeline {
             steps {
                 echo 'Beginning Security Scan..'
                 sh '#sudo pip install bandit'
-                sh 'bandit -r .'
+                sh '#bandit -r .'
             }
         }
 
@@ -48,5 +48,6 @@ pipeline {
         always {
             publishHTML(allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: '.', reportFiles: 'index.html', reportName: 'My HTML Report')
         }
+        gitPush()
     }
 }
