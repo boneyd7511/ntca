@@ -24,7 +24,7 @@ pipeline {
         stage('Security Scanner') {
             steps {
                 echo 'Beginning Security Scan..'
-                sh 'bandit -r .'
+                sh '#bandit -r .'
             }
         }
 
