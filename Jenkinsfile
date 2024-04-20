@@ -38,6 +38,8 @@ pipeline {
                 sh '#sudo pip install ruff'
                 sh 'ruff format'
                 withCredentials([gitUsernamePassword(credentialsId: 'boneyd7511-github-token', gitToolName: 'Default')]) {
+                    sh 'git add .'
+                    sh 'git commit -m "Formatted code with Ruff"'
                     sh 'git push -u origin master'
                 }
                 sh '''
