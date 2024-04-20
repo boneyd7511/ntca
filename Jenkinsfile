@@ -13,25 +13,41 @@ pipeline {
                 )
             }
         }
+
+        stage("Create Report File") {
+            steps {
+                script {
+                    def time = sh(script: 'date "+%F-%T"', returnStdout: true).trim()
+                    def report = "jenkins-reports/python_report_${time}.txt"
+                }
+            }
+        }
         
         stage('Lint') {
             steps {
                 echo 'Linting..'
-                sh '#find . -name "*.py" -exec pylint {} +'
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    sh 'touch jenkins-reports/"lint_report_$(date +"%F %T")"'
+                    sh 'find . -name "*.py" -exec pylint {} + > ${report}'
+                {
             }
         }
         
         stage('Security Scanner') {
             steps {
                 echo 'Beginning Security Scan..'
-                sh '#bandit -r .'
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    sh 'bandit -r . > ${report}'
+                }
             }
         }
 
         stage('Format') {
             steps {
                 echo 'Formatting..'
-                sh 'ruff format'
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    sh 'ruff format > ${report}'
+                }
             }
         }
 
