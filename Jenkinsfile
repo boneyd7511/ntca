@@ -28,7 +28,7 @@ pipeline {
             steps {
                 echo 'Linting..'
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    sh "find . -name '*.py' -exec pylint {} + > ${env.REPORT} 2>&1"
+                    sh "find . -name '*.py' -exec pylint {} + > ${env.REPORT}"
                 }
             }
         }
@@ -37,7 +37,7 @@ pipeline {
             steps {
                 echo 'Beginning Security Scan..'
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    sh "bandit -r . > ${env.REPORT} 2>&1"
+                    sh "bandit -r . > ${env.REPORT}"
                 }
             }
         }
@@ -46,7 +46,7 @@ pipeline {
             steps {
                 echo 'Formatting..'
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    sh "ruff format > ${env.REPORT} 2>&1"
+                    sh "ruff format > ${env.REPORT}"
                 }
             }
         }
