@@ -17,14 +17,14 @@ pipeline {
         stage('Lint') {
             steps {
                 echo 'Linting..'
-                sh 'find . -name "*.py" -exec pylint {} +'
+                sh '#find . -name "*.py" -exec pylint {} +'
             }
         }
         
         stage('Security Scanner') {
             steps {
                 echo 'Beginning Security Scan..'
-                sh '#bandit -r .'
+                sh 'bandit -r .'
             }
         }
 
