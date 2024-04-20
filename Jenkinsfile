@@ -28,7 +28,7 @@ pipeline {
             steps {
                 echo 'Linting..'
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    sh "find . -name "*.py" -exec pylint {} + > ${report}"
+                    sh "find . -name '*.py' -exec pylint {} + > ${report}"
                 }
             }
         }
