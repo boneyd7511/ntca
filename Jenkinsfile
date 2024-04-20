@@ -2,6 +2,16 @@ pipeline {
     agent any
 
     stages {
+        stage("Clone Git Repository") {
+            steps {
+                git(
+                    url: "https://github.com/boneyd7511/ntca",
+                    branch: "master",
+                    changelog: true,
+                    poll: true
+                )
+            }
+        }
         stage('Lint') {
             steps {
                 echo 'Linting..'
@@ -28,7 +38,7 @@ pipeline {
                 sh '#sudo pip install ruff'
                 sh 'ruff format'
                 withCredentials([gitUsernamePassword(credentialsId: 'boneyd7511-github-token', gitToolName: 'Default')]) {
-                    sh 'git push -u origin'
+                    sh 'git push -u origin master'
                 }
                 sh '''
                     #git config user.email "jenkins@example.com"
