@@ -17,7 +17,7 @@ pipeline {
         stage('Lint') {
             steps {
                 echo 'Linting..'
-                sh '#find . -name "*.py" -exec pylint {} +'
+                sh 'find . -name "*.py" -exec pylint {} +'
             }
         }
         
