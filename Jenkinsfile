@@ -29,7 +29,7 @@ pipeline {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     sh 'touch jenkins-reports/"lint_report_$(date +"%F %T")"'
                     sh 'find . -name "*.py" -exec pylint {} + > ${report}'
-                {
+                }
             }
         }
         
