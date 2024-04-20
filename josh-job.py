@@ -15,15 +15,16 @@ from netmiko import ConnectHandler
 # Setting the name here gives a category for these jobs to be categorized into
 name = "josh-v.com Demo jobs"
 
+
 class GetShowVersion(Job):
     device = ObjectVar(
-        model=Device, # Using the Device model imported to say I want to select devices
+        model=Device,  # Using the Device model imported to say I want to select devices
         query_params={
             # Using this as a method to make sure that the device has a primary IP address
-            "has_primary_ip": True, 
-            "status": "active", # Used to make sure that the device is active
-            }
-        )
+            "has_primary_ip": True,
+            "status": "active",  # Used to make sure that the device is active
+        },
+    )
 
     # I like to describe the class Meta as what information about the Job to pass into Nautobot to help describe the Job
     class Meta:
@@ -34,7 +35,7 @@ class GetShowVersion(Job):
             settings.CELERY_TASK_DEFAULT_QUEUE,
             "priority",
             "bulk",
-            ]
+        ]
 
     # The code execution, all things for the job are here.
     def run(self, data, commit):

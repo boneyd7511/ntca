@@ -1,9 +1,15 @@
 from django.contrib.contenttypes.models import ContentType
 
-#from nautobot.apps.jobs import Job, register_jobs
+# from nautobot.apps.jobs import Job, register_jobs
 from nautobot.core.celery import register_jobs
 from nautobot.apps.jobs import Job, StringVar, IntegerVar, ObjectVar
-from nautobot.dcim.models import Location, LocationType, Device, Manufacturer, DeviceType
+from nautobot.dcim.models import (
+    Location,
+    LocationType,
+    Device,
+    Manufacturer,
+    DeviceType,
+)
 from nautobot.extras.models import Status, Role
 
 
@@ -17,7 +23,9 @@ class NewBranch(Job):
     switch_count = IntegerVar(description="Number of access switches to create")
     manufacturer = ObjectVar(model=Manufacturer, required=False)
     switch_model = ObjectVar(
-        description="Access switch model", model=DeviceType, query_params={"manufacturer_id": "$manufacturer"}
+        description="Access switch model",
+        model=DeviceType,
+        query_params={"manufacturer_id": "$manufacturer"},
     )
 
     def run(self, location_name, switch_count, switch_model):
@@ -51,9 +59,14 @@ class NewBranch(Job):
         # Generate a CSV table of new devices
         output = ["name,make,model"]
         for switch in Device.objects.filter(location=location):
-            attrs = [switch.name, switch.device_type.manufacturer.name, switch.device_type.model]
+            attrs = [
+                switch.name,
+                switch.device_type.manufacturer.name,
+                switch.device_type.model,
+            ]
             output.append(",".join(attrs))
 
         return "\n".join(output)
-    
+
+
 register_jobs(NewBranch)
