@@ -1,0 +1,36 @@
+[main]	INFO	profile include tests: None
+[main]	INFO	profile exclude tests: None
+[main]	INFO	cli include tests: None
+[main]	INFO	cli exclude tests: None
+[main]	INFO	running on Python 3.11.2
+Run started:2024-04-20 18:48:07.978331
+
+Test results:
+>> Issue: [B113:request_without_timeout] Requests call without timeout
+   Severity: Medium   Confidence: Low
+   CWE: CWE-400 (https://cwe.mitre.org/data/definitions/400.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.8/plugins/b113_request_without_timeout.html
+   Location: ./jobs/cve_job.py:58:19
+57	        # Send a GET request to the URL
+58	        response = requests.get(url)
+59	
+
+--------------------------------------------------
+
+Code scanned:
+	Total lines of code: 354
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 0
+		Medium: 1
+		High: 0
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 1
+		Medium: 0
+		High: 0
+Files skipped (0):
