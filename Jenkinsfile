@@ -18,8 +18,8 @@ pipeline {
             steps {
                 script {
                     def time = sh(script: 'date "+%F-%T"', returnStdout: true).trim()
-                    def report = "jenkins-reports/python_report_${time}.txt"
-                    sh "touch ${report}"
+                    env.REPORT = "jenkins-reports/python_report_${time}.txt"
+                    sh "touch ${env.REPORT}"
                 }
             }
         }
@@ -28,7 +28,7 @@ pipeline {
             steps {
                 echo 'Linting..'
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    sh "find . -name '*.py' -exec pylint {} + > ${report}"
+                    sh "find . -name '*.py' -exec pylint {} + > ${env.REPORT}"
                 }
             }
         }
@@ -37,7 +37,7 @@ pipeline {
             steps {
                 echo 'Beginning Security Scan..'
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    sh "bandit -r . > ${report}"
+                    sh "bandit -r . > ${env.REPORT}"
                 }
             }
         }
@@ -46,7 +46,7 @@ pipeline {
             steps {
                 echo 'Formatting..'
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    sh "ruff format > ${report}"
+                    sh "ruff format > ${env.REPORT}"
                 }
             }
         }
@@ -56,9 +56,9 @@ pipeline {
                 echo 'Trying push to GitHub...'
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     withCredentials([gitUsernamePassword(credentialsId: 'boneyd7511-github-token', gitToolName: 'Default')]) {
-                    sh 'git add .'
-                    sh 'git commit -m "Formatted code with Ruff"'
-                    sh 'git push -u origin master'
+                        sh 'git add .'
+                        sh 'git commit -m "Formatted code with Ruff"'
+                        sh 'git push -u origin master'
                     }
                 }
             }
