@@ -28,7 +28,7 @@ pipeline {
             steps {
                 echo 'Linting..'
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    sh "echo 'LINTING REPORT' >> ${env.REPORT}"
+                    sh "echo '__________LINTING REPORT__________' >> ${env.REPORT}"
                     sh "find . -name '*.py' -exec pylint {} + >> ${env.REPORT}"
                 }
                 sh "echo '\n' >> ${env.REPORT}"
@@ -39,7 +39,7 @@ pipeline {
             steps {
                 echo 'Beginning Security Scan..'
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    sh "echo 'SECURITY SCANNER REPORT' >> ${env.REPORT}"
+                    sh "echo '__________SECURITY SCANNER REPORT__________' >> ${env.REPORT}"
                     sh "bandit -r . >> ${env.REPORT}"
                 }
                 sh "echo '\n' >> ${env.REPORT}"
@@ -50,7 +50,7 @@ pipeline {
             steps {
                 echo 'Formatting..'
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    sh "echo 'FORMATTING REPORT' >> ${env.REPORT}"
+                    sh "echo '__________FORMATTING REPORT__________' >> ${env.REPORT}"
                     sh "ruff format >> ${env.REPORT}"
                 }
                 sh "echo '\n' >> ${env.REPORT}"
