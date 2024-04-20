@@ -30,6 +30,7 @@ pipeline {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     sh "echo 'LINTING REPORT' >> ${env.REPORT}"
                     sh "find . -name '*.py' -exec pylint {} + >> ${env.REPORT}"
+                    sh "echo '\n' >> ${env.REPORT}"
                 }
             }
         }
@@ -40,6 +41,7 @@ pipeline {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     sh "echo 'SECURITY SCANNER REPORT' >> ${env.REPORT}"
                     sh "bandit -r . >> ${env.REPORT}"
+                    sh "echo '\n' >> ${env.REPORT}"
                 }
             }
         }
@@ -50,6 +52,7 @@ pipeline {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     sh "echo 'FORMATTING REPORT' >> ${env.REPORT}"
                     sh "ruff format >> ${env.REPORT}"
+                    sh "echo '\n' >> ${env.REPORT}"
                 }
             }
         }
