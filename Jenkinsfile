@@ -19,7 +19,7 @@ pipeline {
                 script {
                     def time = sh(script: 'date "+%F-%T"', returnStdout: true).trim()
                     def report = "jenkins-reports/python_report_${time}.txt"
-                    sh 'touch ${report}'
+                    sh "touch ${report}"
                 }
             }
         }
