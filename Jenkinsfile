@@ -32,10 +32,18 @@ pipeline {
             steps {
                 echo 'Formatting..'
                 sh 'ruff format'
-                withCredentials([gitUsernamePassword(credentialsId: 'boneyd7511-github-token', gitToolName: 'Default')]) {
+            }
+        }
+
+        stage('Git Push') {
+            steps {
+                echo 'Trying push to GitHub...'
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    withCredentials([gitUsernamePassword(credentialsId: 'boneyd7511-github-token', gitToolName: 'Default')]) {
                     sh 'git add .'
                     sh 'git commit -m "Formatted code with Ruff"'
                     sh 'git push -u origin master'
+                    }
                 }
             }
         }
