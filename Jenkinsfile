@@ -37,7 +37,7 @@ pipeline {
             steps {
                 echo 'Beginning Security Scan..'
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    sh "bandit -r ."
+                    sh "bandit -r . > bandit_report.txt 2>&1"
                 }
             }
         }
