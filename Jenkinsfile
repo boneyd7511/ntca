@@ -28,7 +28,7 @@ pipeline {
                 sh '#sudo pip install ruff'
                 sh 'ruff format'
                 withCredentials([gitUsernamePassword(credentialsId: 'boneyd7511-github-token', gitToolName: 'Default')]) {
-                    sh "git push -u origin master"
+                    sh 'git push -u origin main'
                 }
                 sh '''
                     #git config user.email "jenkins@example.com"
