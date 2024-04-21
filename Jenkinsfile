@@ -23,6 +23,17 @@ pipeline {
                 }
             }
         }
+
+        stage('Format') {
+            steps {
+                echo 'Formatting..'
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    sh "echo '__________FORMATTING REPORT__________' >> ${env.REPORT}"
+                    sh "ruff format >> ${env.REPORT}"
+                }
+                sh "echo '\n' >> ${env.REPORT}"
+            }
+        }
         
         stage('Lint') {
             steps {
@@ -45,41 +56,18 @@ pipeline {
                 sh "echo '\n' >> ${env.REPORT}"
             }
         }
-
-        stage('Format') {
-            steps {
-                echo 'Formatting..'
-                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    sh "echo '__________FORMATTING REPORT__________' >> ${env.REPORT}"
-                    sh "ruff format >> ${env.REPORT}"
-                }
-                sh "echo '\n' >> ${env.REPORT}"
-            }
-        }
-
+        
         stage('Git Push') {
             steps {
                 echo 'Trying push to GitHub...'
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     withCredentials([gitUsernamePassword(credentialsId: 'boneyd7511-github-token', gitToolName: 'Default')]) {
                         sh 'git add .'
-                        sh 'git commit -m "Formatted code with Ruff"'
+                        sh 'git commit -m "Push from Jenkins Python Pipeline"'
                         sh 'git push -u origin master'
                     }
                 }
             }
-        }
-
-        stage('Validate') {
-            steps {
-                echo 'Validating..'
-            }
-        }
-    }
-
-    post {
-        always {
-            publishHTML(allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: '.', reportFiles: 'index.html', reportName: 'My HTML Report')
         }
     }
 }
