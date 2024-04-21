@@ -55,7 +55,7 @@ class ProvisionCVE(Job):
 
     def download_file(self, url, filename):
         # Send a GET request to the URL
-        # response = requests.get(url)
+        response = requests.get(url)
 
         # Check if the request was successful (status code 200)
         if response.status_code == 200:
