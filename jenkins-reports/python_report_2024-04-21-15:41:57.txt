@@ -1,0 +1,203 @@
+__________LINTING REPORT__________
+************* Module hello
+myapp/hello.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+myapp/hello.py:1:0: E0401: Unable to import 'fire' (import-error)
+myapp/hello.py:4:0: C0116: Missing function or method docstring (missing-function-docstring)
+myapp/hello.py:5:11: C0209: Formatting a regular string which could be a f-string (consider-using-f-string)
+************* Module Python Pipeline.josh-job
+josh-job.py:5:0: C0301: Line too long (101/100) (line-too-long)
+josh-job.py:29:0: C0301: Line too long (120/100) (line-too-long)
+josh-job.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+josh-job.py:1:0: C0103: Module name "josh-job" doesn't conform to snake_case naming style (invalid-name)
+josh-job.py:1:0: E0401: Unable to import 'django.conf' (import-error)
+josh-job.py:2:0: E0401: Unable to import 'nautobot.core.celery' (import-error)
+josh-job.py:6:0: E0401: Unable to import 'nautobot.dcim.models' (import-error)
+josh-job.py:10:0: E0401: Unable to import 'nautobot.extras.jobs' (import-error)
+josh-job.py:13:0: E0401: Unable to import 'netmiko' (import-error)
+josh-job.py:16:0: C0103: Constant name "name" doesn't conform to UPPER_CASE naming style (invalid-name)
+josh-job.py:19:0: C0115: Missing class docstring (missing-class-docstring)
+josh-job.py:30:4: C0115: Missing class docstring (missing-class-docstring)
+josh-job.py:30:4: R0903: Too few public methods (0/2) (too-few-public-methods)
+josh-job.py:41:4: C0116: Missing function or method docstring (missing-function-docstring)
+josh-job.py:41:24: W0613: Unused argument 'commit' (unused-argument)
+josh-job.py:19:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+josh-job.py:13:0: W0611: Unused ConnectHandler imported from netmiko (unused-import)
+************* Module Python Pipeline.__init__
+__init__.py:1:0: C0305: Trailing newlines (trailing-newlines)
+************* Module Python Pipeline
+__init__.py:1:0: C0103: Module name "Python Pipeline" doesn't conform to snake_case naming style (invalid-name)
+************* Module Python Pipeline.test-job
+test-job.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+test-job.py:1:0: C0103: Module name "test-job" doesn't conform to snake_case naming style (invalid-name)
+test-job.py:1:0: E0401: Unable to import 'nautobot.core.celery' (import-error)
+test-job.py:2:0: E0401: Unable to import 'nautobot.extras.jobs' (import-error)
+test-job.py:16:4: C0115: Missing class docstring (missing-class-docstring)
+test-job.py:16:4: R0903: Too few public methods (0/2) (too-few-public-methods)
+test-job.py:24:4: C0116: Missing function or method docstring (missing-function-docstring)
+test-job.py:11:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+************* Module Python Pipeline.jobs.cve_job copy
+jobs/cve_job copy.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+jobs/cve_job copy.py:1:0: C0103: Module name "cve_job copy" doesn't conform to snake_case naming style (invalid-name)
+jobs/cve_job copy.py:1:0: E0401: Unable to import 'django.contrib.contenttypes.models' (import-error)
+jobs/cve_job copy.py:4:0: E0401: Unable to import 'nautobot.core.celery' (import-error)
+jobs/cve_job copy.py:5:0: E0401: Unable to import 'nautobot.apps.jobs' (import-error)
+jobs/cve_job copy.py:6:0: E0401: Unable to import 'nautobot.dcim.models' (import-error)
+jobs/cve_job copy.py:13:0: E0401: Unable to import 'nautobot.extras.models' (import-error)
+jobs/cve_job copy.py:16:0: C0115: Missing class docstring (missing-class-docstring)
+jobs/cve_job copy.py:17:4: C0115: Missing class docstring (missing-class-docstring)
+jobs/cve_job copy.py:17:4: R0903: Too few public methods (0/2) (too-few-public-methods)
+jobs/cve_job copy.py:31:4: C0116: Missing function or method docstring (missing-function-docstring)
+jobs/cve_job copy.py:32:8: C0103: Variable name "STATUS_PLANNED" doesn't conform to snake_case naming style (invalid-name)
+jobs/cve_job copy.py:16:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+************* Module Python Pipeline.jobs
+jobs/__init__.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+************* Module Python Pipeline.jobs.cve_job
+jobs/cve_job.py:150:0: C0301: Line too long (104/100) (line-too-long)
+jobs/cve_job.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+jobs/cve_job.py:1:0: E0401: Unable to import 'nautobot.core.celery' (import-error)
+jobs/cve_job.py:2:0: E0401: Unable to import 'nautobot.apps.jobs' (import-error)
+jobs/cve_job.py:3:0: E0401: Unable to import 'nautobot_device_lifecycle_mgmt.models' (import-error)
+jobs/cve_job.py:4:0: E0401: Unable to import 'nautobot_device_lifecycle_mgmt' (import-error)
+jobs/cve_job.py:6:0: E0401: Unable to import 'selenium' (import-error)
+jobs/cve_job.py:7:0: E0401: Unable to import 'selenium.webdriver.chrome.options' (import-error)
+jobs/cve_job.py:8:0: E0401: Unable to import 'bs4' (import-error)
+jobs/cve_job.py:15:0: C0115: Missing class docstring (missing-class-docstring)
+jobs/cve_job.py:16:4: C0115: Missing class docstring (missing-class-docstring)
+jobs/cve_job.py:16:4: R0903: Too few public methods (0/2) (too-few-public-methods)
+jobs/cve_job.py:23:4: C0116: Missing function or method docstring (missing-function-docstring)
+jobs/cve_job.py:41:8: C0200: Consider using enumerate instead of iterating with range and len (consider-using-enumerate)
+jobs/cve_job.py:56:4: C0116: Missing function or method docstring (missing-function-docstring)
+jobs/cve_job.py:58:19: W3101: Missing timeout argument for method 'requests.get' can cause your program to hang indefinitely (missing-timeout)
+jobs/cve_job.py:63:41: C0103: Variable name "f" doesn't conform to snake_case naming style (invalid-name)
+jobs/cve_job.py:66:4: C0116: Missing function or method docstring (missing-function-docstring)
+jobs/cve_job.py:69:8: R1702: Too many nested blocks (7/5) (too-many-nested-blocks)
+jobs/cve_job.py:100:4: C0116: Missing function or method docstring (missing-function-docstring)
+jobs/cve_job.py:100:4: R0914: Too many local variables (21/15) (too-many-locals)
+jobs/cve_job.py:172:23: C0121: Comparison 'cve_object == None' should be 'cve_object is None' (singleton-comparison)
+jobs/cve_job.py:113:8: R1702: Too many nested blocks (6/5) (too-many-nested-blocks)
+jobs/cve_job.py:185:23: C0121: Comparison 'cve_object != None' should be 'cve_object is not None' (singleton-comparison)
+jobs/cve_job.py:113:8: R1702: Too many nested blocks (6/5) (too-many-nested-blocks)
+jobs/cve_job.py:100:4: R0912: Too many branches (19/12) (too-many-branches)
+jobs/cve_job.py:113:8: R1702: Too many nested blocks (6/5) (too-many-nested-blocks)
+jobs/cve_job.py:9:0: C0411: standard import "import time" should be placed before "from nautobot.core.celery import register_jobs" (wrong-import-order)
+jobs/cve_job.py:11:0: C0411: standard import "import os" should be placed before "from nautobot.core.celery import register_jobs" (wrong-import-order)
+jobs/cve_job.py:12:0: C0411: standard import "import json" should be placed before "from nautobot.core.celery import register_jobs" (wrong-import-order)
+jobs/cve_job.py:4:0: W0611: Unused choices imported from nautobot_device_lifecycle_mgmt (unused-import)
+************* Module Python Pipeline.cve-job
+cve-job.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+cve-job.py:1:0: C0103: Module name "cve-job" doesn't conform to snake_case naming style (invalid-name)
+cve-job.py:1:0: E0401: Unable to import 'django.contrib.contenttypes.models' (import-error)
+cve-job.py:3:0: E0401: Unable to import 'nautobot.core.celery' (import-error)
+cve-job.py:4:0: E0401: Unable to import 'nautobot.apps.jobs' (import-error)
+cve-job.py:5:0: E0401: Unable to import 'nautobot.dcim.models' (import-error)
+cve-job.py:12:0: E0401: Unable to import 'nautobot.extras.models' (import-error)
+cve-job.py:15:0: C0115: Missing class docstring (missing-class-docstring)
+cve-job.py:16:4: C0115: Missing class docstring (missing-class-docstring)
+cve-job.py:16:4: R0903: Too few public methods (0/2) (too-few-public-methods)
+cve-job.py:30:4: C0116: Missing function or method docstring (missing-function-docstring)
+cve-job.py:31:8: C0103: Variable name "STATUS_PLANNED" doesn't conform to snake_case naming style (invalid-name)
+cve-job.py:15:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+cve-job.py:1:0: R0801: Similar lines in 2 files
+==Python Pipeline.cve-job:[14:71]
+==Python Pipeline.jobs.cve_job copy:[15:72]
+class NewBranch(Job):
+    class Meta:
+        name = "New Branch"
+        description = "Provision a new branch location"
+        field_order = ["location_name", "switch_count", "switch_model"]
+
+    location_name = StringVar(description="Name of the new location")
+    switch_count = IntegerVar(description="Number of access switches to create")
+    manufacturer = ObjectVar(model=Manufacturer, required=False)
+    switch_model = ObjectVar(
+        description="Access switch model",
+        model=DeviceType,
+        query_params={"manufacturer_id": "$manufacturer"},
+    )
+
+    def run(self, location_name, switch_count, switch_model):
+        STATUS_PLANNED = Status.objects.get(name="Planned")
+
+        # Create the new location
+        root_type = LocationType.objects.get_or_create(name="Campus")
+        location = Location(
+            name=location_name,
+            location_type=root_type,
+            status=STATUS_PLANNED,
+        )
+        location.validated_save()
+        self.logger.info("Created new location", extra={"object": location})
+
+        # Create access switches
+        device_ct = ContentType.objects.get_for_model(Device)
+        switch_role = Role.objects.get(name="Access Switch")
+        switch_role.content_types.add(device_ct)
+        for i in range(1, switch_count + 1):
+            switch = Device(
+                device_type=switch_model,
+                name=f"{location.name}-switch{i}",
+                location=location,
+                status=STATUS_PLANNED,
+                role=switch_role,
+            )
+            switch.validated_save()
+            self.logger.info("Created new switch", extra={"object": switch})
+
+        # Generate a CSV table of new devices
+        output = ["name,make,model"]
+        for switch in Device.objects.filter(location=location):
+            attrs = [
+                switch.name,
+                switch.device_type.manufacturer.name,
+                switch.device_type.model,
+            ]
+            output.append(",".join(attrs))
+
+        return "\n".join(output)
+
+
+register_jobs(NewBranch) (duplicate-code)
+
+------------------------------------------------------------------
+Your code has been rated at 1.48/10 (previous run: 0.95/10, +0.53)
+
+
+
+__________SECURITY SCANNER REPORT__________
+Run started:2024-04-21 15:42:01.121544
+
+Test results:
+>> Issue: [B113:request_without_timeout] Requests call without timeout
+   Severity: Medium   Confidence: Low
+   CWE: CWE-400 (https://cwe.mitre.org/data/definitions/400.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.8/plugins/b113_request_without_timeout.html
+   Location: ./jobs/cve_job.py:58:19
+57	        # Send a GET request to the URL
+58	        response = requests.get(url)
+59	
+
+--------------------------------------------------
+
+Code scanned:
+	Total lines of code: 354
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 0
+		Medium: 1
+		High: 0
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 1
+		Medium: 0
+		High: 0
+Files skipped (0):
+
+
+__________FORMATTING REPORT__________
+9 files left unchanged
+
+
